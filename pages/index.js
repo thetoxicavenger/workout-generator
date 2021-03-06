@@ -6,7 +6,7 @@ export default function Home() {
   const [error, setError] = useState(undefined);
 
   const _getRandomWorkout = () => {
-    return fetch("/api/workouts/random")
+    return fetch("/api/workouts/random?numExercises=asd")
       .then((res) => res.json())
       .then((workout) => setWorkout(workout))
       .catch((err) => setError(err));
