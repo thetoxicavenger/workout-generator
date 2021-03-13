@@ -3,12 +3,15 @@ import { useState } from "react";
 
 export default function Home() {
   const [workout, setWorkout] = useState(null);
+  const [numExercises, setNumExercises] = useState(3);
   const [error, setError] = useState(undefined);
 
   const _getRandomWorkout = () => {
-    return fetch("/api/workouts/random?numExercises=asd")
+    return fetch("/api/workouts/random?numExercises=" + numExercises)
       .then((res) => res.json())
-      .then((workout) => setWorkout(workout))
+      .then((workout) => {
+        setWorkout(workout);
+      })
       .catch((err) => setError(err));
   };
 
@@ -19,6 +22,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Workout Generator</h1>
+      <div>
+        <input
+          type="number"
+          min="1"
+          value={numExercises}
+          onChange={(e) => setNumExercises(e.target.value)}
+        />
+      </div>
       <div>
         <button onClick={_getRandomWorkout}>Generate Workout</button>
       </div>
