@@ -3,11 +3,16 @@ import { useState } from "react";
 
 export default function Home() {
   const [workout, setWorkout] = useState(null);
-  const [numExercises, setNumExercises] = useState(3);
+  const [numSets, setNumSets] = useState(2);
+  const [numExercisesPerSet, setNumExercisesPerSet] = useState(3);
   const [error, setError] = useState(undefined);
-
+  // **** TODO ***
+  // convert to not random workout, which means a refactor
+  // [id] should be used for predetermined workouts, ala "back & bis", "chest & shoulders", etc.
   const _getRandomWorkout = () => {
-    return fetch("/api/workouts/random?numExercises=" + numExercises)
+    return fetch(
+      `/api/workouts/random?numSets=${numSets}&numExercisesPerSet=${numExercisesPerSet}`
+    )
       .then((res) => res.json())
       .then((workout) => {
         setWorkout(workout);
@@ -22,12 +27,29 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>Workout Generator</h1>
+      {/* TODO convert to selects; both need to be whole nums */}
       <div>
+        <div>
+          <label>Number of Sets?</label>
+        </div>
+        <div>
+          <input
+            type="number"
+            min="1"
+            value={numSets}
+            onChange={(e) => setNumSets(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <label>Number of Exercises Per Set?</label>
+        </div>
         <input
           type="number"
           min="1"
-          value={numExercises}
-          onChange={(e) => setNumExercises(e.target.value)}
+          value={numExercisesPerSet}
+          onChange={(e) => setNumExercisesPerSet(e.target.value)}
         />
       </div>
       <div>
