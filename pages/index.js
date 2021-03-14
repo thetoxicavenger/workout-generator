@@ -1,13 +1,31 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const [workout, setWorkout] = useState(null);
-  const [numExercises, setNumExercises] = useState(3);
+  // const [allExercises, setAllExercises] = useState(null);
+  const [numSets, setNumSets] = useState(2);
   const [error, setError] = useState(undefined);
 
-  const _getRandomWorkout = () => {
-    return fetch("/api/workouts/random?numExercises=" + numExercises)
+  // **** TODO ***
+  // convert to not random workout, which means a refactor
+  // [id] should be used for predetermined workouts, ala "back & bis", "chest & shoulders", etc.
+
+  // const _getAllExercises = () => {
+  //   return fetch("/api/exercises")
+  //     .then((res) => res.json())
+  //     .then((exercises) => {
+  //       setAllExercises(exercises);
+  //     })
+  //     .catch((err) => setError(err));
+  // };
+
+  // useEffect(() => {
+  //   _getAllExercises();
+  // }, []);
+
+  const _getWorkout = () => {
+    return fetch(`/api/workout?numSets=${numSets}`)
       .then((res) => res.json())
       .then((workout) => {
         setWorkout(workout);
@@ -23,26 +41,38 @@ export default function Home() {
       </Head>
       <h1>Workout Generator</h1>
       <div>
-        <input
-          type="number"
-          min="1"
-          value={numExercises}
-          onChange={(e) => setNumExercises(e.target.value)}
-        />
+        <div>
+          <label>How many sets?</label>
+        </div>
+        <div>
+          <input
+            type="number"
+            min="1"
+            value={numSets}
+            onChange={(e) => setNumSets(e.target.value)}
+          />
+        </div>
       </div>
       <div>
-        <button onClick={_getRandomWorkout}>Generate Workout</button>
+        <button onClick={_getWorkout}>Generate Workout</button>
       </div>
       <section>
         {!!error && <p>Could not generate workout</p>}
         {!!workout && (
           <>
             <h2>Your Workout:</h2>
-            <ul>
-              {workout.map((exercise) => {
-                return <li key={exercise}>{exercise}</li>;
+            <>
+              {workout.sets.map((set) => {
+                return (
+                  <ul key={set.id}>
+                    <h2>Set {set.id + 1}</h2>
+                    {set.exercises.map((exercise) => {
+                      return <li key={exercise.id}>{exercise.name}</li>;
+                    })}
+                  </ul>
+                );
               })}
-            </ul>
+            </>
           </>
         )}
       </section>

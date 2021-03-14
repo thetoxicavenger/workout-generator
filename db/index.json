@@ -1,0 +1,76 @@
+{
+  "exercises": [
+    {
+      "id": 0,
+      "name": "bent over row - shoulder width grip"
+    },
+    {
+      "id": 1,
+      "name": "bent over row - bar grip against wall"
+    },
+    {
+      "id": 2,
+      "name": "incline chest press against wall - narrow grip"
+    },
+    {
+      "id": 3,
+      "name": "incline chest press against wall - alternating-handed"
+    },
+    {
+      "id": 4,
+      "name": "side planks"
+    },
+    {
+      "id": 5,
+      "name": "shrugs"
+    },
+    {
+      "id": 6,
+      "name": "bicep curls w/ olympic bar"
+    },
+    {
+      "id": 7,
+      "name": "bench"
+    },
+    {
+      "id": 8,
+      "name": "incline bench"
+    },
+    {
+      "id": 9,
+      "name": "decline bench"
+    },
+    {
+      "id": 10,
+      "name": "squats"
+    },
+    {
+      "id": 11,
+      "name": "front hold squats"
+    },
+    {
+      "id": 12,
+      "name": "deadlifts"
+    },
+    {
+      "id": 13,
+      "name": "cleans"
+    },
+    {
+      "id": 14,
+      "name": "clean & jerk"
+    },
+    {
+      "id": 15,
+      "name": "front dumbbell raise"
+    },
+    {
+      "id": 16,
+      "name": "side dumbbell raise"
+    },
+    {
+      "id": 17,
+      "name": "standing military press w/ olympic bar"
+    }
+  ]
+}
